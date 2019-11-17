@@ -2,13 +2,14 @@
  * Gets all students details
  */
 
-import { call, put, select, takeLatest } from 'redux-saga/effects';
-import request from 'utils/request';
-import { GET_STUDENTS } from './constants';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import {
   saveStudentsToReducer,
   showErrorWhileFetchingStudents,
 } from './actions';
+
+import { GET_STUDENTS } from './constants';
+import request from 'utils/request';
 
 /**
  * Get students

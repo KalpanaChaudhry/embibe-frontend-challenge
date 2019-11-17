@@ -4,9 +4,9 @@
 
 import {
   GET_STUDENTS,
+  LOADING,
   SAVE_STUDENTS_TO_REDUCER,
   SHOW_ERROR_WHILE_FETCHING_STUDENTS,
-  LOADING,
 } from './constants';
 
 /**
@@ -29,7 +29,7 @@ export function makeApiCallToFetchStudents() {
  * @return {object} An action object with a type of SAVE_STUDENTS_TO_REDUCER
  */
 
-export function saveStudentsToReducer(sudents) {
+export function saveStudentsToReducer(students) {
   return {
     type: SAVE_STUDENTS_TO_REDUCER,
     students,

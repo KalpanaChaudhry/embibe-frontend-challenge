@@ -3,9 +3,11 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Fab from '@material-ui/core/Fab';
+import Grid from '@material-ui/core/Grid';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import PropTypes from 'prop-types';
 import React from 'react';
+import SearchBar from 'components/SearchBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Zoom from '@material-ui/core/Zoom';
@@ -17,6 +19,9 @@ const useStyles = makeStyles(theme => ({
     position: 'fixed',
     bottom: theme.spacing(2),
     right: theme.spacing(2),
+  },
+  fontLarge: {
+    fontSize: 30,
   },
 }));
 
@@ -61,12 +66,31 @@ ScrollTop.propTypes = {
 };
 
 export default function BackToTop(props) {
+  const classes = useStyles();
   return (
     <React.Fragment>
       <CssBaseline />
       <AppBar>
         <Toolbar>
-          <Typography variant="h6">Embibe</Typography>
+          <Grid container>
+            <Grid item sm={2} xs={12}>
+              <Typography variant="h6" className={classes.fontLarge}>
+                Embibe
+              </Typography>
+            </Grid>
+            <Grid item xs={10}>
+              <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+              >
+                <Grid item>
+                  <SearchBar />
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
       <Toolbar id="back-to-top-anchor" />

@@ -4,8 +4,11 @@ import { makeApiCallToFetchStudents, setLoadingState } from './actions';
 
 import AppBar from 'components/AppBar';
 import { FormattedMessage } from 'react-intl';
+import Grid from '@material-ui/core/Grid';
 import { Helmet } from 'react-helmet';
+import LoadingIndicator from 'components/LoadingIndicator';
 import PropTypes from 'prop-types';
+import StudentCard from 'components/StudentsCard';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -32,14 +35,25 @@ export function DashboardPage({
       fetchStudents();
     }
   }, []);
-
   return (
     <>
       <Helmet>
         <title>Dashboard</title>
         <meta name="description" content="Students Dashboard" />
       </Helmet>
-      <AppBar />
+      {!isLoading && (
+        <AppBar>
+          <Grid container spacing={3}>
+            {students &&
+              Object.keys(students) &&
+              Object.keys(students).length &&
+              Object.keys(students).map(id => (
+                <StudentCard student={students[id]} key={id} />
+              ))}
+          </Grid>
+        </AppBar>
+      )}
+      {isLoading && <LoadingIndicator />}
     </>
   );
 }
@@ -53,7 +67,7 @@ DashboardPage.PropTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  students: getStudents(),
+  students: getStudents() || {},
   error: getDashboardError(),
   isLoading: getLoadingState(),
 });

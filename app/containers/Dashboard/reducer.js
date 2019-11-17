@@ -7,18 +7,20 @@
  *
  */
 
-import produce from 'immer';
 import {
+  LOADING,
   SAVE_STUDENTS_TO_REDUCER,
   SHOW_ERROR_WHILE_FETCHING_STUDENTS,
-  LOADING,
 } from './constants';
+
+import produce from 'immer';
 
 // The initial state of the App
 export const initialState = {
   students: {},
   err: null,
   isLoading: false,
+  filteredStudents: {},
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -26,20 +28,8 @@ const dashboardReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case SAVE_STUDENTS_TO_REDUCER:
-        const tempStudents = action.students;
-        const studentsKeys =
-          typeof tempStudents === 'object' && Object.keys(tempStudents);
-
-        Array.isArray(studentsKeys) &&
-          studentsKeys.length &&
-          studentsKeys.forEach(student => {
-            student.totalMarks =
-              (students.marks &&
-                typeof student.marks === 'object' &&
-                Object.values(student.marks).reduce((a, b) => a + b)) ||
-              0;
-          });
-        draft.students = tempStudents;
+        draft.students = action.students;
+        draft.filteredStudents = action.students;
         draft.isLoading = false;
         break;
       case SHOW_ERROR_WHILE_FETCHING_STUDENTS:

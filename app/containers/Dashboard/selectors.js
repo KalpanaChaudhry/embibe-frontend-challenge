@@ -11,7 +11,7 @@ const dashboardState = state => state.dashboard || initialState;
 const getStudents = () =>
   createSelector(
     dashboardState,
-    dashboard => dashboard.students,
+    dashboard => dashboard.filteredStudents,
   );
 
 // get error occurred
