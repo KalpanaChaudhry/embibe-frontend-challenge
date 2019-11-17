@@ -1,6 +1,6 @@
 import React, { memo, useEffect } from 'react';
 import { getDashboardError, getLoadingState, getStudents } from './selectors';
-import { makeApiCallToFetchStudents, setLoadingState } from './actions';
+import { makeApiCallToFetchStudents, search, setLoadingState } from './actions';
 
 import AppBar from 'components/AppBar';
 import { FormattedMessage } from 'react-intl';
@@ -25,6 +25,7 @@ export function DashboardPage({
   isLoading,
   fetchStudents,
   setLoading,
+  search,
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
@@ -42,7 +43,7 @@ export function DashboardPage({
         <meta name="description" content="Students Dashboard" />
       </Helmet>
       {!isLoading && (
-        <AppBar>
+        <AppBar search={search}>
           <Grid container spacing={3}>
             {students &&
               Object.keys(students) &&
@@ -64,6 +65,7 @@ DashboardPage.PropTypes = {
   isLoading: PropTypes.bool,
   fetchStudents: PropTypes.func,
   setLoading: PropTypes.func,
+  search: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -76,6 +78,7 @@ export function mapDispatchToProps(dispatch) {
   return {
     fetchStudents: () => dispatch(makeApiCallToFetchStudents()),
     setLoading: isLoading => dispatch(setLoadingState(isLoading)),
+    search: query => dispatch(search(query)),
   };
 }
 

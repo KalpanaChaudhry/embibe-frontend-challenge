@@ -24,7 +24,7 @@ export default function StudentCard({ student }) {
           subheader={
             <>
               <Typography variant="body2" color="textSecondary" component="p">
-                Id: {student.rollNo} | Total Marks:
+                <b>Id:</b> {student.rollNo} | <b>Total Marks:</b>
                 {Object.values(student.marks).reduce((a, b) => a + b)}
               </Typography>
             </>

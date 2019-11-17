@@ -1,7 +1,6 @@
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Fab from '@material-ui/core/Fab';
 import Grid from '@material-ui/core/Grid';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
@@ -69,7 +68,6 @@ export default function BackToTop(props) {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <CssBaseline />
       <AppBar>
         <Toolbar>
           <Grid container>
@@ -78,7 +76,7 @@ export default function BackToTop(props) {
                 Embibe
               </Typography>
             </Grid>
-            <Grid item xs={10}>
+            <Grid item lg={8} sm={12}>
               <Grid
                 container
                 direction="row"
@@ -86,10 +84,11 @@ export default function BackToTop(props) {
                 alignItems="center"
               >
                 <Grid item>
-                  <SearchBar />
+                  <SearchBar search={props.search} />
                 </Grid>
               </Grid>
             </Grid>
+            <Grid item xs={2} />
           </Grid>
         </Toolbar>
       </AppBar>

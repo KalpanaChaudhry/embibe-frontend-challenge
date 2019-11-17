@@ -10,8 +10,10 @@
 import {
   LOADING,
   SAVE_STUDENTS_TO_REDUCER,
+  SEARCH,
   SHOW_ERROR_WHILE_FETCHING_STUDENTS,
 } from './constants';
+import { pickBy, startsWith } from 'lodash';
 
 import produce from 'immer';
 
@@ -38,6 +40,12 @@ const dashboardReducer = (state = initialState, action) =>
         break;
       case LOADING:
         draft.isLoading = action.isLoading;
+        break;
+      case SEARCH:
+        const filter = pickBy(draft.students, student =>
+          startsWith(student.name.toLowerCase(), action.query.toLowerCase()),
+        );
+        draft.filteredStudents = filter;
         break;
       default:
         break;

@@ -6,6 +6,7 @@ import {
   GET_STUDENTS,
   LOADING,
   SAVE_STUDENTS_TO_REDUCER,
+  SEARCH,
   SHOW_ERROR_WHILE_FETCHING_STUDENTS,
 } from './constants';
 
@@ -63,5 +64,20 @@ export function setLoadingState(isLoading) {
   return {
     type: LOADING,
     isLoading,
+  };
+}
+
+/**
+ * Filter the students by name
+ *
+ * @param {string} query filter by name
+ *
+ * @return {object} An action object with a type of SHOW_ERROR_WHILE_FETCHING_STUDENTS
+ */
+
+export function search(query) {
+  return {
+    type: SEARCH,
+    query,
   };
 }

@@ -1,11 +1,13 @@
+import React, { useState } from 'react';
+
 import DirectionsIcon from '@material-ui/icons/Directions';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
 import MenuIcon from '@material-ui/icons/Menu';
 import Paper from '@material-ui/core/Paper';
-import React from 'react';
 import SearchIcon from '@material-ui/icons/Search';
+import { debounce } from 'lodash';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -28,18 +30,26 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SearchBar() {
+export default function SearchBar({ search }) {
   const classes = useStyles();
-
+  const [searchString, changeSearchString] = useState('');
+  const handleOnChange = debounce(val => {
+    search(val);
+    changeSearchString(val);
+  }, 1000);
   return (
     <Paper component="form" className={classes.root}>
       <InputBase
         className={classes.input}
         placeholder="Search Here"
         inputProps={{ 'aria-label': 'search here' }}
+        onChange={e => {
+          e.preventDefault();
+          handleOnChange(e.target.value);
+        }}
       />
       <IconButton
-        type="submit"
+        onClick={() => handleOnChange(searchString)}
         className={classes.iconButton}
         aria-label="search"
       >
