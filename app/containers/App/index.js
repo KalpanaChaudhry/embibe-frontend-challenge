@@ -10,24 +10,9 @@ import { Route, Switch } from 'react-router-dom';
 
 import Container from '@material-ui/core/Container';
 import DashboardPage from 'containers/Dashboard/Loadable';
-import FeaturePage from 'containers/FeaturePage/Loadable';
-import Footer from 'components/Footer';
-import GlobalStyle from '../../global-styles';
-import Header from 'components/Header';
 import { Helmet } from 'react-helmet';
-import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import React from 'react';
-import styled from 'styled-components';
-
-const AppWrapper = styled.div`
-  max-width: calc(768px + 16px * 2);
-  margin: 0 auto;
-  display: flex;
-  min-height: 100%;
-  padding: 0 16px;
-  flex-direction: column;
-`;
 
 export default function App() {
   return (
@@ -40,7 +25,6 @@ export default function App() {
       </Helmet>
       <Switch>
         <Route exact path="/" component={DashboardPage} />
-        <Route path="/features" component={FeaturePage} />
         <Route path="" component={NotFoundPage} />
       </Switch>
     </Container>

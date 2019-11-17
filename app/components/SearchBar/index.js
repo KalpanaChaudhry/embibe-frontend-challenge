@@ -63,6 +63,14 @@ export default function SearchBar({ search }) {
       >
         <DirectionsIcon />
       </IconButton>
+      <Divider className={classes.divider} orientation="vertical" />
+      <IconButton
+        color="primary"
+        className={classes.iconButton}
+        aria-label="directions"
+      >
+        <DirectionsIcon />
+      </IconButton>
     </Paper>
   );
 }
