@@ -1,0 +1,67 @@
+/*
+ * Dashboard Actions
+ */
+
+import {
+  GET_STUDENTS,
+  SAVE_STUDENTS_TO_REDUCER,
+  SHOW_ERROR_WHILE_FETCHING_STUDENTS,
+  LOADING,
+} from './constants';
+
+/**
+ * Calls saga to make an api call to fetch students
+ *
+ * @param {} username
+ */
+
+export function makeApiCallToFetchStudents() {
+  return {
+    type: GET_STUDENTS,
+  };
+}
+
+/**
+ * Set the result fro api call to reducer
+ *
+ * @param {object} students List of students from api call
+ *
+ * @return {object} An action object with a type of SAVE_STUDENTS_TO_REDUCER
+ */
+
+export function saveStudentsToReducer(sudents) {
+  return {
+    type: SAVE_STUDENTS_TO_REDUCER,
+    students,
+  };
+}
+
+/**
+ * Set the error from api call to reducer
+ *
+ * @param  {object} err The new text of the input field
+ *
+ * @return {object} An action object with a type of SHOW_ERROR_WHILE_FETCHING_STUDENTS
+ */
+
+export function showErrorWhileFetchingStudents(err) {
+  return {
+    type: SHOW_ERROR_WHILE_FETCHING_STUDENTS,
+    err,
+  };
+}
+
+/**
+ * Set the loading state
+ *
+ * @param  {boolean} isLoading State to check whether it is loading
+ *
+ * @return {object} An action object with a type of SHOW_ERROR_WHILE_FETCHING_STUDENTS
+ */
+
+export function setLoadingState(isLoading) {
+  return {
+    type: LOADING,
+    isLoading,
+  };
+}
