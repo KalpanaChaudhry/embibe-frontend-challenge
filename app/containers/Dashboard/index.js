@@ -1,6 +1,18 @@
 import React, { memo, useEffect } from 'react';
-import { getDashboardError, getLoadingState, getStudents } from './selectors';
-import { makeApiCallToFetchStudents, search, setLoadingState } from './actions';
+import {
+  getDashboardError,
+  getLoadingState,
+  getSortByMarksState,
+  getSortByNameState,
+  getStudents,
+} from './selectors';
+import {
+  makeApiCallToFetchStudents,
+  search,
+  setLoadingState,
+  sortByMarks,
+  sortByName,
+} from './actions';
 
 import AppBar from 'components/AppBar';
 import { FormattedMessage } from 'react-intl';
@@ -26,6 +38,10 @@ export function DashboardPage({
   fetchStudents,
   setLoading,
   search,
+  sortByName,
+  sortByMarks,
+  isSortByNameClicked,
+  isSortByMarksClicked,
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
@@ -43,7 +59,13 @@ export function DashboardPage({
         <meta name="description" content="Students Dashboard" />
       </Helmet>
       {!isLoading && (
-        <AppBar search={search}>
+        <AppBar
+          search={search}
+          sortByName={sortByName}
+          isSortByNameClicked={isSortByNameClicked}
+          isSortByMarksClicked={isSortByMarksClicked}
+          sortByMarks={sortByMarks}
+        >
           <Grid container spacing={3}>
             {students &&
               Object.keys(students) &&
@@ -66,12 +88,18 @@ DashboardPage.PropTypes = {
   fetchStudents: PropTypes.func,
   setLoading: PropTypes.func,
   search: PropTypes.func,
+  sortByName: PropTypes.func,
+  sortByMarks: PropTypes.func,
+  isSortByNameClicked: PropTypes.bool,
+  isSortByMarksClicked: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   students: getStudents() || {},
   error: getDashboardError(),
   isLoading: getLoadingState(),
+  isSortByNameClicked: getSortByNameState(),
+  isSortByMarksClicked: getSortByMarksState(),
 });
 
 export function mapDispatchToProps(dispatch) {
@@ -79,6 +107,8 @@ export function mapDispatchToProps(dispatch) {
     fetchStudents: () => dispatch(makeApiCallToFetchStudents()),
     setLoading: isLoading => dispatch(setLoadingState(isLoading)),
     search: query => dispatch(search(query)),
+    sortByName: () => dispatch(sortByName()),
+    sortByMarks: () => dispatch(sortByMarks()),
   };
 }
 

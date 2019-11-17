@@ -28,4 +28,22 @@ const getLoadingState = () =>
     dashboard => dashboard.isLoading,
   );
 
-export { dashboardState, getStudents, getDashboardError, getLoadingState };
+const getSortByNameState = () =>
+  createSelector(
+    dashboardState,
+    dashboard => dashboard.nameSortClicked,
+  );
+
+const getSortByMarksState = () =>
+  createSelector(
+    dashboardState,
+    dashboard => dashboard.marksSortClicked,
+  );
+export {
+  dashboardState,
+  getStudents,
+  getDashboardError,
+  getLoadingState,
+  getSortByNameState,
+  getSortByMarksState,
+};

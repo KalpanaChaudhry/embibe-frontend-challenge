@@ -8,6 +8,8 @@ import {
   SAVE_STUDENTS_TO_REDUCER,
   SEARCH,
   SHOW_ERROR_WHILE_FETCHING_STUDENTS,
+  SORT_BY_MARKS,
+  SORT_BY_NAME,
 } from './constants';
 
 /**
@@ -79,5 +81,17 @@ export function search(query) {
   return {
     type: SEARCH,
     query,
+  };
+}
+
+export function sortByName() {
+  return {
+    type: SORT_BY_NAME,
+  };
+}
+
+export function sortByMarks() {
+  return {
+    type: SORT_BY_MARKS,
   };
 }

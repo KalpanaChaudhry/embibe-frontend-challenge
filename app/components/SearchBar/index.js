@@ -1,10 +1,10 @@
+import { ArrowDownward, ArrowUpward } from '@material-ui/icons';
+import { Fab, Tooltip } from '@material-ui/core';
 import React, { useState } from 'react';
 
-import DirectionsIcon from '@material-ui/icons/Directions';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
-import MenuIcon from '@material-ui/icons/Menu';
 import Paper from '@material-ui/core/Paper';
 import SearchIcon from '@material-ui/icons/Search';
 import { debounce } from 'lodash';
@@ -30,13 +30,20 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SearchBar({ search }) {
+export default function SearchBar({
+  search,
+  sortByName,
+  sortByMarks,
+  isSortByNameClicked,
+  isSortByMarksClicked,
+}) {
   const classes = useStyles();
   const [searchString, changeSearchString] = useState('');
   const handleOnChange = debounce(val => {
     search(val);
     changeSearchString(val);
   }, 1000);
+
   return (
     <Paper component="form" className={classes.root}>
       <InputBase
@@ -56,21 +63,58 @@ export default function SearchBar({ search }) {
         <SearchIcon />
       </IconButton>
       <Divider className={classes.divider} orientation="vertical" />
-      <IconButton
-        color="primary"
-        className={classes.iconButton}
-        aria-label="directions"
-      >
-        <DirectionsIcon />
-      </IconButton>
+      {!isSortByNameClicked ? (
+        <Tooltip title="Sorted name in descending order">
+          <Fab
+            variant="extended"
+            aria-label="like"
+            color="primary"
+            onClick={() => sortByName()}
+          >
+            Name
+            <ArrowDownward />
+          </Fab>
+        </Tooltip>
+      ) : (
+        <Tooltip title="Sorted name in ascending order">
+          <Fab
+            variant="extended"
+            aria-label="like"
+            color="primary"
+            onClick={() => sortByName()}
+          >
+            Name
+            <ArrowUpward />
+          </Fab>
+        </Tooltip>
+      )}
       <Divider className={classes.divider} orientation="vertical" />
-      <IconButton
-        color="primary"
-        className={classes.iconButton}
-        aria-label="directions"
-      >
-        <DirectionsIcon />
-      </IconButton>
+
+      {!isSortByMarksClicked ? (
+        <Tooltip title="Sorted marks in descending order">
+          <Fab
+            variant="extended"
+            aria-label="like"
+            color="primary"
+            onClick={() => sortByMarks()}
+          >
+            Marks
+            <ArrowDownward />
+          </Fab>
+        </Tooltip>
+      ) : (
+        <Tooltip title="Sorted marks in ascending order">
+          <Fab
+            variant="extended"
+            aria-label="like"
+            color="primary"
+            onClick={() => sortByMarks()}
+          >
+            Marks
+            <ArrowUpward />
+          </Fab>
+        </Tooltip>
+      )}
     </Paper>
   );
 }

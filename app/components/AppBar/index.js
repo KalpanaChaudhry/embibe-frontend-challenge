@@ -84,7 +84,13 @@ export default function BackToTop(props) {
                 alignItems="center"
               >
                 <Grid item>
-                  <SearchBar search={props.search} />
+                  <SearchBar
+                    search={props.search}
+                    sortByName={props.sortByName}
+                    sortByMarks={props.sortByMarks}
+                    isSortByNameClicked={props.isSortByNameClicked}
+                    isSortByMarksClicked={props.isSortByMarksClicked}
+                  />
                 </Grid>
               </Grid>
             </Grid>

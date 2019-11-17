@@ -12,8 +12,10 @@ import {
   SAVE_STUDENTS_TO_REDUCER,
   SEARCH,
   SHOW_ERROR_WHILE_FETCHING_STUDENTS,
+  SORT_BY_MARKS,
+  SORT_BY_NAME,
 } from './constants';
-import { pickBy, startsWith } from 'lodash';
+import { orderBy, pickBy, startsWith, toArray } from 'lodash';
 
 import produce from 'immer';
 
@@ -23,6 +25,8 @@ export const initialState = {
   err: null,
   isLoading: false,
   filteredStudents: {},
+  nameSortClicked: false,
+  marksSortClicked: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -46,6 +50,46 @@ const dashboardReducer = (state = initialState, action) =>
           startsWith(student.name.toLowerCase(), action.query.toLowerCase()),
         );
         draft.filteredStudents = filter;
+        break;
+      case SORT_BY_NAME:
+        if (draft.nameSortClicked === false) {
+          const sortedNames = orderBy(
+            toArray(draft.filteredStudents),
+            ['name'],
+            ['asc'],
+          );
+          draft.filteredStudents = sortedNames;
+          draft.nameSortClicked = true;
+        } else {
+          const sortedNamesDesc = orderBy(
+            toArray(draft.filteredStudents),
+            ['name'],
+            ['desc'],
+          );
+          draft.filteredStudents = sortedNamesDesc;
+          draft.nameSortClicked = false;
+        }
+        break;
+      case SORT_BY_MARKS:
+        if (draft.marksSortClicked === false) {
+          const sortedNames = orderBy(
+            toArray(draft.filteredStudents),
+            (z, m) => toArray(z.marks).reduce((sumi, eleme) => eleme + sumi),
+            ['asc'],
+          );
+
+          draft.filteredStudents = sortedNames;
+
+          draft.marksSortClicked = true;
+        } else {
+          const sortedNamesDesc = orderBy(
+            toArray(draft.filteredStudents),
+            (z, m) => toArray(z.marks).reduce((sumi, eleme) => eleme + sumi),
+            ['desc'],
+          );
+          draft.filteredStudents = sortedNamesDesc;
+          draft.marksSortClicked = false;
+        }
         break;
       default:
         break;
