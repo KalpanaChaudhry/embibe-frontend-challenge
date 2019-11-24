@@ -3,7 +3,6 @@ import { Route, Switch, useHistory } from 'react-router-dom';
 
 import DashboardPage from 'containers/Dashboard/Loadable';
 import DetailsPage from 'containers/DetailsPage/Loadable';
-import Graph from '../../components/Graph';
 import RegisterPage from 'containers/RegisterPage/Loadable';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -28,7 +27,6 @@ export function Home({ studentsList }) {
 
       <Route exact path="/dashboard" component={DashboardPage} />
       <Route exact path="/:id" component={DetailsPage} />
-      <Route path="/graph" component={Graph} />
     </Switch>
   );
 }
