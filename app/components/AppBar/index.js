@@ -76,14 +76,14 @@ export default function BackToTop(props) {
                 Embibe
               </Typography>
             </Grid>
-            <Grid item lg={8} sm={12}>
+            <Grid item lg={8} sm={10}>
               <Grid
                 container
                 direction="row"
                 justify="center"
                 alignItems="center"
               >
-                <Grid item>
+                <Grid item sm={12}>
                   <SearchBar
                     search={props.search}
                     sortByName={props.sortByName}

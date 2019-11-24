@@ -11,6 +11,7 @@ import 'sanitize.css/sanitize.css';
 // Load the favicon and the .htaccess file
 import '!file-loader?name=[name].[ext]!./images/favicon.ico';
 import 'file-loader?name=.htaccess!./.htaccess'; // eslint-disable-line import/extensions
+import 'react-virtualized/styles.css';
 
 // Import root app
 import App from 'containers/App';

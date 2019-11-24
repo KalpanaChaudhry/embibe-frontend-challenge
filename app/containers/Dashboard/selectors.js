@@ -39,6 +39,13 @@ const getSortByMarksState = () =>
     dashboardState,
     dashboard => dashboard.marksSortClicked,
   );
+
+const getAllStudents = () =>
+  createSelector(
+    dashboardState,
+    dashboard => dashboard.students,
+  );
+
 export {
   dashboardState,
   getStudents,
@@ -46,4 +53,5 @@ export {
   getLoadingState,
   getSortByNameState,
   getSortByMarksState,
+  getAllStudents,
 };

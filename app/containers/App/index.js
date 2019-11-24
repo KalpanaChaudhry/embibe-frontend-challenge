@@ -11,6 +11,7 @@ import { Route, Switch } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import DashboardPage from 'containers/Dashboard/Loadable';
 import { Helmet } from 'react-helmet';
+import Home from 'containers/Home/index';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import React from 'react';
 
@@ -24,7 +25,7 @@ export default function App() {
         <meta name="description" content="A React.js Boilerplate application" />
       </Helmet>
       <Switch>
-        <Route exact path="/" component={DashboardPage} />
+        <Route path="/" component={Home} />
         <Route path="" component={NotFoundPage} />
       </Switch>
     </Container>

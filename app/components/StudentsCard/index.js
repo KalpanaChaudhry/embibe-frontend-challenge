@@ -7,10 +7,19 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import { useHistory } from 'react-router-dom';
 
-export default function StudentCard({ student }) {
+export default function StudentCard({ student, style }) {
+  const history = useHistory();
   return (
-    <Grid item lg={4} sm={6} xs={12}>
+    <Grid
+      item
+      lg={4}
+      sm={6}
+      xs={12}
+      onClick={() => history.push(`/${student.rollNo}`)}
+      style={{ cursor: 'pointer', ...style }}
+    >
       <Card>
         <CardHeader
           avatar={

@@ -1,5 +1,5 @@
 import { ArrowDownward, ArrowUpward } from '@material-ui/icons';
-import { Fab, Tooltip } from '@material-ui/core';
+import { Button, Tooltip } from '@material-ui/core';
 import React, { useState } from 'react';
 
 import Divider from '@material-ui/core/Divider';
@@ -15,7 +15,6 @@ const useStyles = makeStyles(theme => ({
     padding: '2px 4px',
     display: 'flex',
     alignItems: 'center',
-    width: 400,
   },
   input: {
     marginLeft: theme.spacing(1),
@@ -65,54 +64,54 @@ export default function SearchBar({
       <Divider className={classes.divider} orientation="vertical" />
       {!isSortByNameClicked ? (
         <Tooltip title="Sorted name in descending order">
-          <Fab
-            variant="extended"
-            aria-label="like"
+          <Button
+            variant="outlined"
+            aria-label="name"
             color="primary"
             onClick={() => sortByName()}
+            endIcon={<ArrowDownward />}
           >
             Name
-            <ArrowDownward />
-          </Fab>
+          </Button>
         </Tooltip>
       ) : (
         <Tooltip title="Sorted name in ascending order">
-          <Fab
-            variant="extended"
-            aria-label="like"
+          <Button
+            variant="outlined"
+            aria-label="name"
             color="primary"
             onClick={() => sortByName()}
+            endIcon={<ArrowUpward />}
           >
             Name
-            <ArrowUpward />
-          </Fab>
+          </Button>
         </Tooltip>
       )}
       <Divider className={classes.divider} orientation="vertical" />
 
       {!isSortByMarksClicked ? (
         <Tooltip title="Sorted marks in descending order">
-          <Fab
-            variant="extended"
-            aria-label="like"
+          <Button
+            variant="outlined"
+            aria-label="marks"
             color="primary"
             onClick={() => sortByMarks()}
+            endIcon={<ArrowDownward />}
           >
             Marks
-            <ArrowDownward />
-          </Fab>
+          </Button>
         </Tooltip>
       ) : (
         <Tooltip title="Sorted marks in ascending order">
-          <Fab
-            variant="extended"
-            aria-label="like"
+          <Button
+            variant="outlined"
+            aria-label="marks"
             color="primary"
             onClick={() => sortByMarks()}
+            endIcon={<ArrowUpward />}
           >
             Marks
-            <ArrowUpward />
-          </Fab>
+          </Button>
         </Tooltip>
       )}
     </Paper>

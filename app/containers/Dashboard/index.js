@@ -15,7 +15,8 @@ import {
 } from './actions';
 
 import AppBar from 'components/AppBar';
-import { FormattedMessage } from 'react-intl';
+import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer';
+import Collection from 'react-virtualized/dist/commonjs/Collection';
 import Grid from '@material-ui/core/Grid';
 import { Helmet } from 'react-helmet';
 import LoadingIndicator from 'components/LoadingIndicator';
@@ -66,12 +67,14 @@ export function DashboardPage({
           isSortByMarksClicked={isSortByMarksClicked}
           sortByMarks={sortByMarks}
         >
-          <Grid container spacing={3}>
+          <Grid container spacing={3} style={{ marginTop: 25 }}>
             {students &&
               Object.keys(students) &&
               Object.keys(students).length &&
               Object.keys(students).map(id => (
+                // <Redirect push to={`/userDetails/${id}`}>
                 <StudentCard student={students[id]} key={id} />
+                // </Redirect>
               ))}
           </Grid>
         </AppBar>
